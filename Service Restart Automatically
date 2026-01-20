@@ -1,0 +1,17 @@
+- name: Check if the Site24x7 Agent service is running, restart if down
+  hosts: localhost  # Specify the appropriate host group here
+  become: yes        # Use sudo for privilege escalation
+  tasks:
+
+    - name: Gather service facts
+      ansible.builtin.service_facts:
+
+    - name: Ensure Site24x7 Agent service is running
+      ansible.builtin.service:
+        name: site24x7monagent.service
+        state: restarted  # This will restart the service if it is not running
+      when: ansible_facts.services['site24x7monagent.service'].state != 'running'
+
+    - name: Debug service status
+      debug:
+        msg: "The Site24x7 Agent service was {{ ansible_facts.services['site24x7monagent.service'].state }}"
