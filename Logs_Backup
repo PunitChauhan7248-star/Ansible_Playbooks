@@ -1,0 +1,12 @@
+---
+- name: Sync directory to another path
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Rsync directory
+      ansible.builtin.synchronize:
+        src: /source/directory/
+        dest: /destination/directory/
+        recursive: yes
+        delete: no
