@@ -1,12 +1,16 @@
 ---
-- name: Sync directory to another path
+- name: Copy directory using Ansible copy module
   hosts: aaptest.progressive.in
-  become: yes
+  become: true
+  vars:
+    source_dir: /opt/site24x7/
+    destination_dir: /var/lib/awx/logs/
 
   tasks:
-    - name: Rsync directory
-      ansible.posix.synchronize:
-        src: /opt/site24x7/
-        dest: /var/lib/awx/logs/
-        recursive: yes
-        delete: no
+    - name: Copy directory recursively
+      ansible.builtin.copy:
+        src: "/opt/site24x7/"
+        dest: "/var/lib/awx/logs/"
+        owner: root
+        group: root
+        mode: preserve
