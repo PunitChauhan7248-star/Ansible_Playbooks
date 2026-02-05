@@ -1,12 +1,12 @@
 ---
 - name: Sync directory to another path
-  hosts: all
+  hosts: aaptest.progressive.in
   become: yes
 
   tasks:
     - name: Rsync directory
-      ansible.builtin.synchronize:
-        src: /opt/site24x7
-        dest: /var/lib/awx/logs
+      ansible.posix.synchronize:
+        src: /opt/site24x7/
+        dest: /var/lib/awx/logs/
         recursive: yes
         delete: no
