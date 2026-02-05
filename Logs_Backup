@@ -6,7 +6,7 @@
   tasks:
     - name: Rsync directory
       ansible.builtin.synchronize:
-        src: /source/directory/
-        dest: /destination/directory/
+        src: /opt/site24x7
+        dest: /var/lib/awx/logs
         recursive: yes
         delete: no
